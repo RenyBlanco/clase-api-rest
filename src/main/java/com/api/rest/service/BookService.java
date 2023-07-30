@@ -2,7 +2,6 @@ package com.api.rest.service;
 
 import java.util.List;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +36,14 @@ public class BookService {
 		return MessageResponseDTO.builder().message("Creado con éxito, ID "+savedBook.getId()).build();
 	}
 	
-	public List<Book> listaTodos(){
-		return bookRepository.findAll();
+	public List<BookDTO> listaTodos(){
+		List<Book> listado = bookRepository.findAll();
+		return bookMapper.toDTO(listado);
 	}
 	
-	public Book getBook(Long id) {
-		return bookRepository.findById(id).orElse(null);
+	public BookDTO getBook(Long id) {
+		Book book = bookRepository.findById(id).orElse(null);
+		return bookMapper.toDTO(book);
 	}
 	
 	public void updBook(Book emp) {

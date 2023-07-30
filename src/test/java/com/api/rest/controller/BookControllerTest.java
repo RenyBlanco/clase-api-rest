@@ -38,7 +38,7 @@ public class BookControllerTest {
 	@InjectMocks
 	private BookController bc;
 	
-	public static final String BOOK_URL_API = "/api/v1/book";
+	public static final String BOOK_URL_API = "/api/v1/books";
 	@BeforeEach
 	void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(bc)

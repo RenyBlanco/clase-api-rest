@@ -1,5 +1,7 @@
 package com.api.rest.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -14,4 +16,6 @@ public interface BookMapper {
 	Book toModel(BookDTO bookDTO);
 	
 	BookDTO toDTO(Book book);
+
+	List<BookDTO> toDTO(List<Book> listado);
 }

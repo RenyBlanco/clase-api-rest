@@ -19,7 +19,7 @@ import com.api.rest.modelos.Book;
 import com.api.rest.service.BookService;
 
 @RestController
-@RequestMapping("/api/v1/book")
+@RequestMapping("/api/v1/books")
 public class BookController {
 	
 	@Autowired
@@ -31,9 +31,14 @@ public class BookController {
 	}
 	
 	@GetMapping
-    public Iterable<Book> getClientes() {
+    public Iterable<BookDTO> getClientes() {
     	return bs.listaTodos();
     }
+	
+	@GetMapping("/{id}")
+	public BookDTO getBook(@PathVariable("id") Long id) {
+		return bs.getBook(id);
+	}
 	
 	@DeleteMapping(path="{Id}")
 	public ResponseEntity<String> borraCliente(@PathVariable("Id") Long id) {
