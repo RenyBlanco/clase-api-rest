@@ -2,12 +2,13 @@ package com.api.rest.service;
 
 import java.util.List;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.api.rest.dto.BookDTO;
 import com.api.rest.dto.MessageResponseDTO;
-import com.api.rest.modelos.Author;
+import com.api.rest.mapper.BookMapper;
 import com.api.rest.modelos.Book;
 import com.api.rest.repository.BookRepository;
 
@@ -17,13 +18,22 @@ public class BookService {
 	@Autowired
 	BookRepository bookRepository;
 	
-	public MessageResponseDTO guardaBook(Book book) {
-		Book e = bookRepository.findByIsbn(book.getIsbn());
+	private final BookMapper bookMapper = BookMapper.INSTANCE; 
+	
+	/* private static final BookMapper bookMapper = Mappers.getMapper(BookMapper.class); */
+	
+	public MessageResponseDTO guardaBook(BookDTO bookDTO) {
+		
+		Book bookToSave = bookMapper.toModel(bookDTO);
+		
+		// Revisa si existe el libro
+		Book e = bookRepository.findByIsbn(bookDTO.getIsbn()); 
 		if(e!=null) {
-			System.out.println("Libro ya existe");
-			return null;
+		  System.out.println("Libro ya existe"); 
+		  return null; 
 		}
-		Book savedBook = bookRepository.save(book);
+		
+		Book savedBook = bookRepository.save(bookToSave);
 		return MessageResponseDTO.builder().message("Creado con éxito, ID "+savedBook.getId()).build();
 	}
 	

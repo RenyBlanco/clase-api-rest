@@ -1,5 +1,7 @@
 package com.api.rest.controladores;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.rest.dto.BookDTO;
 import com.api.rest.dto.MessageResponseDTO;
 import com.api.rest.modelos.Book;
 import com.api.rest.service.BookService;
@@ -23,8 +26,8 @@ public class BookController {
 	BookService bs;
 	
 	@PostMapping
-	public MessageResponseDTO create(@RequestBody() Book book) {
-		return bs.guardaBook(book);
+	public MessageResponseDTO create(@RequestBody() @Valid BookDTO bookDTO) {
+		return bs.guardaBook(bookDTO);
 	}
 	
 	@GetMapping
