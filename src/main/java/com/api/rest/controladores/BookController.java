@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.rest.dto.BookDTO;
 import com.api.rest.dto.MessageResponseDTO;
+import com.api.rest.exception.BookNotFoundException;
 import com.api.rest.modelos.Book;
 import com.api.rest.service.BookService;
 
@@ -36,7 +37,7 @@ public class BookController {
     }
 	
 	@GetMapping("/{id}")
-	public BookDTO getBook(@PathVariable("id") Long id) {
+	public BookDTO getBook(@PathVariable("id") Long id) throws BookNotFoundException {
 		return bs.getBook(id);
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.rest.dto.BookDTO;
 import com.api.rest.dto.MessageResponseDTO;
+import com.api.rest.exception.BookNotFoundException;
 import com.api.rest.mapper.BookMapper;
 import com.api.rest.modelos.Book;
 import com.api.rest.repository.BookRepository;
@@ -41,8 +42,8 @@ public class BookService {
 		return bookMapper.toDTO(listado);
 	}
 	
-	public BookDTO getBook(Long id) {
-		Book book = bookRepository.findById(id).orElse(null);
+	public BookDTO getBook(Long id) throws BookNotFoundException {
+		Book book = bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
 		return bookMapper.toDTO(book);
 	}
 	

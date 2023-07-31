@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.api.rest.dto.BookDTO;
+import com.api.rest.exception.BookNotFoundException;
 import com.api.rest.modelos.Book;
 import com.api.rest.repository.BookRepository;
 import static com.api.rest.utils.BookUtils.createFakeBook;;
@@ -26,7 +27,7 @@ public class BookServiceTest {
 	private BookService bs;
 	
 	@Test
-	void whenGivenExistingId() {
+	void whenGivenExistingId() throws BookNotFoundException {
 		Book libroEsperado = createFakeBook();
 		
 		when(bookRepo.findById(libroEsperado.getId()))
