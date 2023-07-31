@@ -25,7 +25,7 @@ public class BookUtils {
                 .chapters(faker.number().numberBetween(1, 20))
                 .isbn("0-596-52068-9")
                 .editora(faker.book().publisher())
-                .authorDTO(createFakeAuthorDTO())
+                .author(createFakeAuthorDTO())
                 .build();
     }
 
@@ -49,7 +49,7 @@ public class BookUtils {
                 .chapters(bookDTO.getChapters())
                 .isbn(bookDTO.getIsbn())
                 .editora(bookDTO.getEditora())
-                .author(createFakeAuthorFrom(bookDTO.getAuthorDTO()))
+                .author(createFakeAuthorFrom(bookDTO.getAuthor()))
                 .build();
     }
 
